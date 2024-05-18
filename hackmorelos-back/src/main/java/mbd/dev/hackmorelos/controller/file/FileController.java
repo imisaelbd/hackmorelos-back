@@ -13,6 +13,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api-alma/file")
 @CrossOrigin(origins = {"*"})
@@ -47,6 +49,18 @@ public class FileController {
                     .body(resource);
         } catch (Exception e) {
             return ResponseEntity.badRequest().body("No se pudo descargar el archivo");
+        }
+    }
+
+    @GetMapping("/getAll")
+    public ResponseEntity<ApiResponse<List<File>>> getAll() {
+        try {
+            return fileService.getAll();
+        } catch (Exception e) {
+            return new ResponseEntity<>(
+                    new ApiResponse<>(
+                            null, true, HttpStatus.INTERNAL_SERVER_ERROR.value(), "Ocurrio un error interno en el servidor"),
+                    HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }

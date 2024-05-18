@@ -19,6 +19,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -50,6 +51,7 @@ public class FileService {
                             savedFile, false, HttpStatus.OK.value(), "Archivo subido correctamente"),
                     HttpStatus.OK);
         } catch (Exception e) {
+            e.printStackTrace();
             return new ResponseEntity<>(
                     new ApiResponse<>(
                             null, true, HttpStatus.INTERNAL_SERVER_ERROR.value(), "No se pudo subir el archivo"),
@@ -67,6 +69,20 @@ public class FileService {
         } else {
             throw new IOException("No se pudo descargar el archivo" + fileName);
         }
+    }
+
+    public ResponseEntity<ApiResponse<List<File>>> getAll () {
+        java.util.List<File> files = fileResository.findAll();
+        if (files.isEmpty()) {
+            return new ResponseEntity<>(
+                    new ApiResponse<>(
+                            null, true, HttpStatus.NOT_FOUND.value(), "No se encontraron archivos"),
+                    HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(
+                new ApiResponse<>(
+                        files, false, HttpStatus.OK.value(), "Archivos encontrados"),
+                HttpStatus.OK);
     }
 
 }

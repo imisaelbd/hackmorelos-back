@@ -12,8 +12,8 @@ public class InstituteDto {
     @NotBlank(message = "El nombre es requerido")
     private String name;
 
-    @NotBlank(message = "El teléfono es requerido")
-    private Long phone;
+    @NotNull(message = "El teléfono es requerido")
+    private double phone;
 
     @NotBlank(message = "El sitio web es requerido")
     private String site;

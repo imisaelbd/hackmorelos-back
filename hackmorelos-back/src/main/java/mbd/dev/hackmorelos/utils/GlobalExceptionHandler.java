@@ -24,7 +24,7 @@ public class GlobalExceptionHandler {
         logger.warning(ex.getMessage());
         return new ResponseEntity<>(
                 new ApiResponse<>(
-                        null, true, 500, "Internal server error"),
+                        null, true, 500, "Ocurrio un error interno en el servidor"),
                 HttpStatus.INTERNAL_SERVER_ERROR
         );
     }
@@ -34,7 +34,7 @@ public class GlobalExceptionHandler {
         logger.warning(ex.getMessage());
         return new ResponseEntity<>(
                 new ApiResponse<>(
-                        null, true, 400, "Bad request : " + Objects.requireNonNull(ex.getBindingResult().getFieldError()).getDefaultMessage()),
+                        null, true, 400,Objects.requireNonNull(ex.getBindingResult().getFieldError()).getDefaultMessage()),
                 HttpStatus.BAD_REQUEST
         );
     }
@@ -44,7 +44,7 @@ public class GlobalExceptionHandler {
         logger.warning(ex.getMessage());
         return new ResponseEntity<>(
                 new ApiResponse<>(
-                        null, true, 401, "Token is expired"),
+                        null, true, 401, "Token expirado"),
                 HttpStatus.UNAUTHORIZED
         );
     }
@@ -54,7 +54,7 @@ public class GlobalExceptionHandler {
         logger.warning(ex.getMessage());
         return new ResponseEntity<>(
                 new ApiResponse<>(
-                        null, true, 401, "Token is malformed"),
+                        null, true, 401, "Token malformado"),
                 HttpStatus.UNAUTHORIZED
         );
     }
@@ -64,7 +64,7 @@ public class GlobalExceptionHandler {
         logger.warning(ex.getMessage());
         return new ResponseEntity<>(
                 new ApiResponse<>(
-                        null, true, 401, "Token is invalid signature"),
+                        null, true, 401, "El token no es valido"),
                 HttpStatus.UNAUTHORIZED
         );
     }
@@ -74,7 +74,7 @@ public class GlobalExceptionHandler {
         logger.warning(ex.getMessage());
         return new ResponseEntity<>(
                 new ApiResponse<>(
-                        null, true, 401, "Token is unsupported"),
+                        null, true, 401, "Token no soportado"),
                 HttpStatus.UNAUTHORIZED
         );
     }
